@@ -1,20 +1,20 @@
-const express = require('express');
-const app = express();
+const express = require('express')
+const app = express()
 
 app.set('PORT', 3000)
-app.use(express.json());
+app.use(express.json())
 
 let authors = [
     { id: 1, firstName: 'Jane', lastName: 'Doe' },
     { id: 2, firstName: 'Paco', lastName: 'Pérez' },
     { id: 3, firstName: 'Pepe', lastName: 'Gómez' }
-];
+]
 
 let books = [
     { id: 1, book: 'Jerry Potter', authorId: 1 },
     { id: 2, book: 'The Spanish', authorId: 2 },
     { id: 3, book: 'Zarzuela', authorId: 3 }
-];
+]
 
 const getAllAuthors = (req, res) => {
     res.status(200).send(authors)
@@ -36,14 +36,14 @@ const createAuthor = (req, res) => {
 const updateAuthor = (req, res) => {
     const {id} = req.params
     const {firstName, lastName} = req.body
-    const author = authors.find(author => author.id === +id);
+    const author = authors.find(author => author.id === +id)
     author.firstName = firstName 
     author.lastName = lastName 
     res.send('Author updated')
 }
 
 const deleteAuthor = (req, res) => {
-  const {id} = req.params
+    const {id} = req.params
     authors = authors.filter(author => author.id !== +id)
     res.send('Deleting author')
 }
@@ -67,7 +67,7 @@ const createBook = (req, res) => {
 const updateBook = (req, res) => {
     const {id} = req.params
     const {book, authorId} = req.body
-    const miBook = books.find(itemBook => itemBook.id === +id);
+    const miBook = books.find(itemBook => itemBook.id === +id)
     miBook.book = book  
     miBook.authorId = authorId 
     res.send('Author updated')
