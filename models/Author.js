@@ -5,6 +5,6 @@ const authorSchema = new mongoose.Schema({
     lastName: {type: String, required: true}
 })
 
-const author = mongoose.model('Author', authorSchema)
+const Author = mongoose.model('Author', authorSchema)
 
-module.exports = author
+module.exports = Author
