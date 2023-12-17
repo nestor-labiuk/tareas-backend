@@ -1,4 +1,4 @@
-const authorsRouter = require('express').Router
+const authorsRouter = require('express').Router()
 const { getAllAuthors, getAuthorById, createAuthor, updateAuthor, deleteAuthor } = require('../controllers/authors.controllers')
 
 
