@@ -1,22 +1,36 @@
+const { isValidObjectId } = require('mongoose')
 const Authors = require('../models/Author')
+
 
 const getAllAuthors = async(req, res) => {
     const authors = await Authors.find({})
-    res.status(200).json({authors})
-}
 
-const getAuthorById = async (req, res) => {
+    if(!authors){
+        res.status(204).json({message: 'There are no authors'})
+    }
+    res.json({message: 'Successful returned authors', authors})
+}
+const getAuthorById = async (req, res ) => {
     const {id} = req.params
+    if (!isValidObjectId(id)){
+        return res.json({message: 'Invalid author'})
+    }
     const author = await Authors.findById(id)
-    res.status(200).json(author)
-  
+    if(!author){
+        return res.json({
+            message: 'Author not found'
+        })
+    }
+    res.status(200).json({
+        message:'Successful returned author',
+        author
+    })
 }
 
 const createAuthor = async (req, res) => {
     const {firstName, lastName} = req.body
     const author = new Authors({firstName, lastName})
     await author.save()
-
     res.status(200).json({message: `El autor ${firstName} ${lastName} fue creado`})
 }
 
